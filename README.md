@@ -33,7 +33,3 @@ Once the project is set up, you can use the following features:
 
 ## Contributing
 Contributions to CT-WebSDK-React are welcome! If you find any issues or have suggestions for improvements, feel free to submit a pull request.
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
