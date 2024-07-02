@@ -11,7 +11,7 @@ To get started with CT-WebSDK-React, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/RohitKhandka/CT-WebSDK-React.git
+   git clone https://github.com/rohkode/CT-WebSDK-React.git
    ```
 2. Install dependencies:
    ```bash
