@@ -2,7 +2,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import clevertap from 'clevertap-web-sdk';
 
-clevertap.init('886-85W-7Z7Z', 'eu1' );
+clevertap.init('886-85W-7Z7Z', 'in1' );
 
 function App() {
 
