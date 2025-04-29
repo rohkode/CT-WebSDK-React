@@ -2,7 +2,9 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import clevertap from 'clevertap-web-sdk';
 
-clevertap.init('886-85W-7Z7Z', 'in1' );
+//To run on chrome use the command on terminal: npm start
+
+clevertap.init('886-85W-7Z7Z', 'eu1' );
 
 function App() {
 
@@ -22,6 +24,26 @@ function App() {
     console.log('Privacy settings updated in CleverTap');
   }, []);
 
+  // Function to get location
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          // Pass the location to clevertap.getLocation()
+          clevertap.getLocation(lat, lng);
+          console.log(`Location obtained: Lat: ${lat}, Lng: ${lng}`);
+        },
+        (error) => {
+          console.error('Error getting location', error);
+        }
+      );
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+    }
+  };
+
   // Web push notification configuration
   clevertap.notifications.push({
     "apnsWebPushId": "<apple web push id>",
@@ -32,10 +54,23 @@ function App() {
     "rejectButtonText": "No thanks",
     "okButtonColor": "#F28046",
     //"askAgainTimeInSeconds": 2, Optional
-    //"skipDialog": true, Optional
+    // "skipDialog": true, // Optional,
     "serviceWorkerPath": "/service-worker.js" // path to your custom service worker file
   });
   console.log('Web push notifications configured in CleverTap');  
+  console.log('Print Hojaaaa');
+
+// Custom Web Inbox API
+
+console.log("Inbox Message Count: ", clevertap.getInboxMessageCount());
+// console.log("Unread Inbox Message Count: ", clevertap.getInboxMessageUnreadCount());
+console.log("All Inbox Messages: ", clevertap.getAllInboxMessages());
+// console.log("Unread Inbox Messages: ", clevertap.getUnreadInboxMessages());
+// // console.log("Inbox Message for ID: ", clevertap.getInboxMessageForId('yourMessageId'));
+// // console.log("Delete Inbox Message: ", clevertap.deleteInboxMessage('yourMessageId'));
+// // console.log("Mark Read Inbox Message: ", clevertap.markReadInboxMessage('yourMessageId'));
+// console.log("Mark All Inbox Messages as Read: ", clevertap.markReadAllInboxMessage());
+// console.log('Print Hojaaaa pls');
 
   const handleLogin = () => {
     // Identify the user
