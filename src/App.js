@@ -22,7 +22,19 @@ function App() {
     // Set privacy options for CleverTap
     clevertap.privacy.push({ useIP: true });
     console.log('Privacy settings updated in CleverTap');
+  
+    // Get and set location if geolocation is supported
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          clevertap.getLocation(position.coords.latitude, position.coords.longitude);
+          console.log("Location set in CleverTap");
+        },
+        (error) => console.error("Geolocation error", error)
+      );
+    }
   }, []);
+  
 
   // Function to get location
   const getLocation = () => {
