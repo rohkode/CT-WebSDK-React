@@ -134,7 +134,6 @@ console.log("All Inbox Messages: ", clevertap.getAllInboxMessages());
 
   return (
     <div className="App">
-    <AddToHomeScreenPrompt />
       <header className="App-header">
         <h1>Welcome to My CleverTap React Web</h1>
         <div>
