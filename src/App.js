@@ -34,27 +34,6 @@ function App() {
       );
     }
   }, []);
-  
-
-  // Function to get location
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const lat = position.coords.latitude;
-          const lng = position.coords.longitude;
-          // Pass the location to clevertap.getLocation()
-          clevertap.getLocation(lat, lng);
-          console.log(`Location obtained: Lat: ${lat}, Lng: ${lng}`);
-        },
-        (error) => {
-          console.error('Error getting location', error);
-        }
-      );
-    } else {
-      console.error('Geolocation is not supported by this browser.');
-    }
-  };
 
   // Web push notification configuration
   clevertap.notifications.push({
