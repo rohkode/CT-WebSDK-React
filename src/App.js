@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import AddToHomeScreenPrompt from "./AddToHomeScreenPrompt";
 import clevertap from 'clevertap-web-sdk';
 
 //To run on chrome use the command on terminal: npm start
@@ -133,6 +134,7 @@ console.log("All Inbox Messages: ", clevertap.getAllInboxMessages());
 
   return (
     <div className="App">
+    <AddToHomeScreenPrompt />
       <header className="App-header">
         <h1>Welcome to My CleverTap React Web</h1>
         <div>
