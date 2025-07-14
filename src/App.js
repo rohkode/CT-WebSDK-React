@@ -1,6 +1,5 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import AddToHomeScreenPrompt from "./AddToHomeScreenPrompt";
 import clevertap from 'clevertap-web-sdk';
 
 //To run on chrome use the command on terminal: npm start
