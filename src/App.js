@@ -60,7 +60,8 @@ function App() {
     okButtonText: "Sign me up!",
     rejectButtonText: "No thanks",
     okButtonColor: "#F28046",
-    skipDialog: true,
+    //"askAgainTimeInSeconds": 2, Optional
+    //skipDialog: true,
     serviceWorkerPath: "/service-worker.js"
   });
 
