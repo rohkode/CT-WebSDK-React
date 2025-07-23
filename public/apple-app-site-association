@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "6L48Q5Z49W.com.clevertap.SampleiOSApp",
+        "paths": [ "*" ]
+      }
+    ]
+  }
+}
