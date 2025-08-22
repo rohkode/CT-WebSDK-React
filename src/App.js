@@ -45,7 +45,7 @@ function App() {
     "rejectButtonText": "No thanks",
     "okButtonColor": "#F28046",
     //"askAgainTimeInSeconds": 2, Optional
-    // "skipDialog": true, // Optional,
+    "skipDialog": true, // Optional,
     "serviceWorkerPath": "/service-worker.js" // path to your custom service worker file
   });
   console.log('Web push notifications configured in CleverTap');  
