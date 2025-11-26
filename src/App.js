@@ -4,7 +4,13 @@ import clevertap from 'clevertap-web-sdk';
 
 //To run on chrome use the command on terminal: npm start
 
-clevertap.init('886-85W-7Z7Z', 'eu1' );
+clevertap.init('886-85W-7Z7Z', 'eu1');
+
+// Safari Browser detection
+const isSafari =
+  navigator.userAgent.includes("Safari") &&
+  !navigator.userAgent.includes("Chrome") &&
+  !navigator.userAgent.includes("Chromium");
 
 function App() {
 
@@ -33,35 +39,66 @@ function App() {
         (error) => console.error("Geolocation error", error)
       );
     }
+
+    // Auto-enable WebPush only for NON-SAFARI browsers
+    if (!isSafari) {
+      clevertap.notifications.push({
+        apnsWebPushId: "<apple web push id>",
+        apnsWebPushServiceUrl: "<safari package service url>",
+        titleText: "Would you like to receive Push Notifications?",
+        bodyText: "We promise to only send you relevant content and give you updates on your transactions",
+        okButtonText: "Sign me up!",
+        rejectButtonText: "No thanks",
+        okButtonColor: "#F28046",
+        serviceWorkerPath: "/service-worker.js"
+      });
+      console.log("Auto push registration for non-Safari browser");
+    }
+
   }, []);
 
+  // MANUAL Safari push subscription method
+  const handleSafariPush = () => {
+    clevertap.notifications.push({
+      apnsWebPushId: "<apple web push id>",
+      apnsWebPushServiceUrl: "<safari package service url>",
+      titleText: "Would you like to receive Push Notifications?",
+      bodyText: "We promise to only send you relevant content and give you updates on your transactions",
+      okButtonText: "Sign me up!",
+      rejectButtonText: "No thanks",
+      okButtonColor: "#F28046",
+      serviceWorkerPath: "/service-worker.js"
+    });
+    console.log("Safari manual push invoked");
+  }; // ✅ FIXED (missing semicolon & brace)
+
   // Web push notification configuration
-  clevertap.notifications.push({
-    "apnsWebPushId": "<apple web push id>",
-    "apnsWebPushServiceUrl": "<safari package service url>",
-    "titleText": "Would you like to receive Push Notifications?",
-    "bodyText": "We promise to only send you relevant content and give you updates on your transactions",
-    "okButtonText": "Sign me up!",
-    "rejectButtonText": "No thanks",
-    "okButtonColor": "#F28046",
-    //"askAgainTimeInSeconds": 2, Optional
-    "skipDialog": true, // Optional,
-    "serviceWorkerPath": "/service-worker.js" // path to your custom service worker file
-  });
-  console.log('Web push notifications configured in CleverTap');  
-  console.log('Print Hojaaaa');
+  // clevertap.notifications.push({
+  //   "apnsWebPushId": "<apple web push id>",
+  //   "apnsWebPushServiceUrl": "<safari package service url>",
+  //   "titleText": "Would you like to receive Push Notifications?",
+  //   "bodyText": "We promise to only send you relevant content and give you updates on your transactions",
+  //   "okButtonText": "Sign me up!",
+  //   "rejectButtonText": "No thanks",
+  //   "okButtonColor": "#F28046",
+  //   //"askAgainTimeInSeconds": 2, Optional
+  //   //"skipDialog": true, // Optional,
+  //   "serviceWorkerPath": "/service-worker.js" // path to your custom service worker file
+  // });
+  // console.log('Web push notifications configured in CleverTap');  
+  // console.log('Print Hojaaaa');
 
-// Custom Web Inbox API
+  // Custom Web Inbox API
 
-console.log("Inbox Message Count: ", clevertap.getInboxMessageCount());
-// console.log("Unread Inbox Message Count: ", clevertap.getInboxMessageUnreadCount());
-console.log("All Inbox Messages: ", clevertap.getAllInboxMessages());
-// console.log("Unread Inbox Messages: ", clevertap.getUnreadInboxMessages());
-// // console.log("Inbox Message for ID: ", clevertap.getInboxMessageForId('yourMessageId'));
-// // console.log("Delete Inbox Message: ", clevertap.deleteInboxMessage('yourMessageId'));
-// // console.log("Mark Read Inbox Message: ", clevertap.markReadInboxMessage('yourMessageId'));
-// console.log("Mark All Inbox Messages as Read: ", clevertap.markReadAllInboxMessage());
-// console.log('Print Hojaaaa pls');
+  console.log("Inbox Message Count: ", clevertap.getInboxMessageCount());
+  // console.log("Unread Inbox Message Count: ", clevertap.getInboxMessageUnreadCount());
+  console.log("All Inbox Messages: ", clevertap.getAllInboxMessages());
+  // console.log("Unread Inbox Messages: ", clevertap.getUnreadInboxMessages());
+  // // console.log("Inbox Message for ID: ", clevertap.getInboxMessageForId('yourMessageId'));
+  // // console.log("Delete Inbox Message: ", clevertap.deleteInboxMessage('yourMessageId'));
+  // // console.log("Mark Read Inbox Message: ", clevertap.markReadInboxMessage('yourMessageId'));
+  console.log("Mark All Inbox Messages as Read: ", clevertap.markReadAllInboxMessage());
+  console.log('Print Hojaaaa pls');
 
   const handleLogin = () => {
     // Identify the user
@@ -135,8 +172,22 @@ console.log("All Inbox Messages: ", clevertap.getAllInboxMessages());
     <div className="App">
       <header className="App-header">
         <h1>Welcome to My CleverTap React Web</h1>
+
+        {/* Safari-specific push button */}
+        {isSafari && (
+          <div>
+            <h2>Enable Push Notifications (Safari)</h2>
+            <button
+              onClick={handleSafariPush}
+              style={{ backgroundColor: 'red', color: 'white', padding: '5px', borderRadius: '5px' }}
+            >
+              Enable Notifications
+            </button>
+          </div>
+        )}
+
         <div>
-        <h2>Trigger OnUserLogin Function</h2>
+          <h2>Trigger OnUserLogin Function</h2>
           <input
             type="text"
             placeholder="Identity"
@@ -161,8 +212,9 @@ console.log("All Inbox Messages: ", clevertap.getAllInboxMessages());
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
-          <button onClick={handleLogin}style={{ backgroundColor: 'red', color: 'white', padding: '5px', borderRadius: '5px' }}>Login</button>
+          <button onClick={handleLogin} style={{ backgroundColor: 'red', color: 'white', padding: '5px', borderRadius: '5px' }}>Login</button>
         </div>
+
         <div>
           <h2>Update User Profile Properties</h2>
           <input
@@ -177,8 +229,9 @@ console.log("All Inbox Messages: ", clevertap.getAllInboxMessages());
             value={preferredLanguage}
             onChange={(e) => setPreferredLanguage(e.target.value)}
           />
-          <button onClick={handleProfilePush}style={{ backgroundColor: 'red', color: 'white', padding: '5px', borderRadius: '5px' }}>Update Profile</button>
+          <button onClick={handleProfilePush} style={{ backgroundColor: 'red', color: 'white', padding: '5px', borderRadius: '5px' }}>Update Profile</button>
         </div>
+
         <div>
           <h2>Trigger Custom Event</h2>
           <input
@@ -199,12 +252,14 @@ console.log("All Inbox Messages: ", clevertap.getAllInboxMessages());
             value={customProp3}
             onChange={(e) => setCustomProp3(e.target.value)}
           />
-          <button onClick={handleCustomEvent}style={{ backgroundColor: 'red', color: 'white', padding: '5px', borderRadius: '5px' }}>Trigger Event</button>
+          <button onClick={handleCustomEvent} style={{ backgroundColor: 'red', color: 'white', padding: '5px', borderRadius: '5px' }}>Trigger Event</button>
         </div>
+
         <div>
           <h2>Trigger Charged Event</h2>
           <button onClick={handleChargedEvent} style={{ backgroundColor: 'red', color: 'white', padding: '5px', borderRadius: '5px' }}>Trigger Charged Event</button>
         </div>
+
       </header>
     </div>
   );
