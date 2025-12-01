@@ -35,21 +35,38 @@ function App() {
     }
   }, []);
 
-  // Web push notification configuration
+  const triggerWebPush = () => {
   clevertap.notifications.push({
-    "apnsWebPushId": "<apple web push id>",
-    "apnsWebPushServiceUrl": "<safari package service url>",
-    "titleText": "Would you like to receive Push Notifications?",
-    "bodyText": "We promise to only send you relevant content and give you updates on your transactions",
-    "okButtonText": "Sign me up!",
-    "rejectButtonText": "No thanks",
-    "okButtonColor": "#F28046",
-    //"askAgainTimeInSeconds": 2, Optional
-    "skipDialog": true, // Optional,
-    "serviceWorkerPath": "/service-worker.js" // path to your custom service worker file
+    // apnsWebPushId: "<apple web push id>",
+    // apnsWebPushServiceUrl: "<safari package service url>",
+    // titleText: "Would you like to receive Push Notifications?",
+    // bodyText: "We promise to only send you relevant content and give you updates on your transactions",
+    // okButtonText: "Sign me up!",
+    // rejectButtonText: "No thanks",
+    // okButtonColor: "#F28046",
+    skipDialog: true,
+    serviceWorkerPath: "/service-worker.js"
   });
-  console.log('Web push notifications configured in CleverTap');  
-  console.log('Print Hojaaaa');
+
+  console.log("Web push notifications configured in CleverTap (on click)");
+};
+
+
+  // Web push notification configuration
+  // clevertap.notifications.push({
+  //   "apnsWebPushId": "<apple web push id>",
+  //   "apnsWebPushServiceUrl": "<safari package service url>",
+  //   "titleText": "Would you like to receive Push Notifications?",
+  //   "bodyText": "We promise to only send you relevant content and give you updates on your transactions",
+  //   "okButtonText": "Sign me up!",
+  //   "rejectButtonText": "No thanks",
+  //   "okButtonColor": "#F28046",
+  //   //"askAgainTimeInSeconds": 2, Optional
+  //   "skipDialog": true, // Optional,
+  //   "serviceWorkerPath": "/service-worker.js" // path to your custom service worker file
+  // });
+  // console.log('Web push notifications configured in CleverTap');  
+  // console.log('Print Hojaaaa');
 
 // Custom Web Inbox API
 
@@ -204,6 +221,15 @@ console.log("All Inbox Messages: ", clevertap.getAllInboxMessages());
         <div>
           <h2>Trigger Charged Event</h2>
           <button onClick={handleChargedEvent} style={{ backgroundColor: 'red', color: 'white', padding: '5px', borderRadius: '5px' }}>Trigger Charged Event</button>
+        </div>
+        <div>
+          <h2>Trigger Web Push</h2>
+          <button 
+            onClick={triggerWebPush} 
+            style={{ backgroundColor: 'red', color: 'white', padding: '5px', borderRadius: '5px' }}
+          >
+            Ask Notification Permission
+          </button>
         </div>
       </header>
     </div>
