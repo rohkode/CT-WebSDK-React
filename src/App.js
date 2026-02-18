@@ -44,7 +44,7 @@ function App() {
     okButtonText: "Sign me up!",
     rejectButtonText: "No thanks",
     okButtonColor: "#F28046",
-    skipDialog: true,
+    // skipDialog: true,
     serviceWorkerPath: "/service-worker.js"
   });
 
