@@ -37,15 +37,15 @@ function App() {
 
   const triggerWebPush = () => {
   clevertap.notifications.push({
-    apnsWebPushId: "<apple web push id>",
-    apnsWebPushServiceUrl: "<safari package service url>",
+    // apnsWebPushId: "<apple web push id>",
+    // apnsWebPushServiceUrl: "<safari package service url>",
     titleText: "Would you like to receive Push Notifications?",
     bodyText: "We promise to only send you relevant content and give you updates on your transactions",
     okButtonText: "Sign me up!",
     rejectButtonText: "No thanks",
     okButtonColor: "#F28046",
     // skipDialog: true,
-    serviceWorkerPath: "/service-worker.js"
+    serviceWorkerPath: "/clevertap_sw.js"
   });
 
   console.log("Web push notifications configured in CleverTap (on click)");
