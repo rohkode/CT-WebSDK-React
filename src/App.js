@@ -35,38 +35,38 @@ function App() {
     }
   }, []);
 
-  const triggerWebPush = () => {
-  clevertap.notifications.push({
-    // apnsWebPushId: "<apple web push id>",
-    // apnsWebPushServiceUrl: "<safari package service url>",
-    titleText: "Would you like to receive Push Notifications?",
-    bodyText: "We promise to only send you relevant content and give you updates on your transactions",
-    okButtonText: "Sign me up!",
-    rejectButtonText: "No thanks",
-    okButtonColor: "#F28046",
-    // skipDialog: true,
-    serviceWorkerPath: "/clevertap_sw.js"
-  });
+//   const triggerWebPush = () => {
+//   clevertap.notifications.push({
+//     // apnsWebPushId: "<apple web push id>",
+//     // apnsWebPushServiceUrl: "<safari package service url>",
+//     titleText: "Would you like to receive Push Notifications?",
+//     bodyText: "We promise to only send you relevant content and give you updates on your transactions",
+//     okButtonText: "Sign me up!",
+//     rejectButtonText: "No thanks",
+//     okButtonColor: "#F28046",
+//     // skipDialog: true,
+//     serviceWorkerPath: "/clevertap_sw.js"
+//   });
 
-  console.log("Web push notifications configured in CleverTap (on click)");
-};
+//   console.log("Web push notifications configured in CleverTap (on click)");
+// };
 
 
   // Web push notification configuration
-  // clevertap.notifications.push({
-  //   "apnsWebPushId": "<apple web push id>",
-  //   "apnsWebPushServiceUrl": "<safari package service url>",
-  //   "titleText": "Would you like to receive Push Notifications?",
-  //   "bodyText": "We promise to only send you relevant content and give you updates on your transactions",
-  //   "okButtonText": "Sign me up!",
-  //   "rejectButtonText": "No thanks",
-  //   "okButtonColor": "#F28046",
-  //   //"askAgainTimeInSeconds": 2, Optional
-  //   "skipDialog": true, // Optional,
-  //   "serviceWorkerPath": "/service-worker.js" // path to your custom service worker file
-  // });
-  // console.log('Web push notifications configured in CleverTap');  
-  // console.log('Print Hojaaaa');
+  clevertap.notifications.push({
+    // "apnsWebPushId": "<apple web push id>",
+    // "apnsWebPushServiceUrl": "<safari package service url>",
+    "titleText": "Would you like to receive Push Notifications?",
+    "bodyText": "We promise to only send you relevant content and give you updates on your transactions",
+    "okButtonText": "Sign me up!",
+    "rejectButtonText": "No thanks",
+    "okButtonColor": "#F28046",
+    //"askAgainTimeInSeconds": 2, Optional
+    "skipDialog": true, // Optional,
+    "serviceWorkerPath": "/clevertap_sw.js" // path to your custom service worker file
+  });
+  console.log('Web push notifications configured in CleverTap');  
+  console.log('Print Hojaaaa');
 
 // Custom Web Inbox API
 
