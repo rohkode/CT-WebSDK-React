@@ -5,6 +5,7 @@ import clevertap from 'clevertap-web-sdk';
 //To run on chrome use the command on terminal: npm start
 
 clevertap.init('886-85W-7Z7Z', 'eu1' );
+clevertap.setLogLevel(3);
 
 function App() {
 
