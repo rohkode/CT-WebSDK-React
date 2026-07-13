@@ -1,11 +1,15 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import clevertap from 'clevertap-web-sdk';
+import ReactGA from "react-ga4";
 
 //To run on chrome use the command on terminal: npm start
 
 clevertap.init('886-85W-7Z7Z', 'eu1' );
 clevertap.setLogLevel(3);
+
+// Initialize Google Analytics
+ReactGA.initialize("G-29GE7Q3GLZ");
 
 function App() {
 
@@ -20,6 +24,12 @@ function App() {
   const [preferredLanguage, setPreferredLanguage] = useState('');
 
   useEffect(() => {
+
+    ReactGA.send({
+    hitType: "pageview",
+    page: window.location.pathname,
+  });
+
     // Set privacy options for CleverTap
     clevertap.privacy.push({ useIP: true });
     console.log('Privacy settings updated in CleverTap');
@@ -82,6 +92,13 @@ console.log("All Inbox Messages: ", clevertap.getAllInboxMessages());
 // console.log('Print Hojaaaa pls');
 
   const handleLogin = () => {
+
+    ReactGA.event({
+    category: "User",
+    action: "Login",
+    label: identity
+  });
+
     // Identify the user
     clevertap.onUserLogin.push({
       Site: {
@@ -108,6 +125,12 @@ console.log("All Inbox Messages: ", clevertap.getAllInboxMessages());
   };
 
   const handleCustomEvent = () => {
+
+    ReactGA.event({
+    category: "Purchase",
+    action: "ItemPurchased React"
+  });
+
     // Track a custom event with properties
     clevertap.event.push('ItemPurchased React', {
       itemName: customProp1,
@@ -119,6 +142,12 @@ console.log("All Inbox Messages: ", clevertap.getAllInboxMessages());
   };
 
   const handleChargedEvent = () => {
+
+    ReactGA.event({
+    category: "Revenue",
+    action: "Charged"
+  });
+
     // Push charged event
     // Generate a unique ID for each charged event
     const chargedID = new Date().getTime();
